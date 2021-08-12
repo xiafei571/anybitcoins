@@ -54,15 +54,28 @@ public class BitcoinServiceMemoryImpl implements BitcoinService {
 		}
 		try {
 			List<String> keys = getBetweenDate(startDatetime, endDatetime);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(startDatetime);
+			int hour_start = calendar.get(Calendar.HOUR_OF_DAY);
+			calendar.setTime(endDatetime);
+			int hour_end = calendar.get(Calendar.HOUR_OF_DAY);
+			
 			List<WalletRecord> list = new ArrayList<WalletRecord>();
-			for (String key : keys) {
+			for (int k = 0; k < keys.size(); k++) {
+				String key = keys.get(k);
 				WalletRecord[] records = RecordInfo.cache.get(key);
 				if (records == null) {
 					return new Result<>();
 				}
 				for (int i = 0; i < records.length; i++) {
 					if (records[i] != null) {
-						list.add(records[i]);
+						if(k == 0 && i < hour_start) {
+							continue;
+						}else if(k == keys.size() - 1 && i > hour_end) {
+							continue;
+						}else {
+							list.add(records[i]);
+						}
 					}
 				}
 			}
