@@ -15,22 +15,29 @@ html, body, #container {
 </style>
 </head>
 <body>
+	<input id="donate" name="test" type="text"/><button>donate</button>
 	<div id="res"></div>
+	<div id="msg"></div>
 	<script>
 		$(function() {
-			$.ajax({
-				url : "history",
-				type : "post",
-				data : JSON.stringify({
-					startDatetime : new Date().getTime(),
-					endDatetime : new Date().getTime()
-				}),
-				contentType : "application/json; charset=utf-8",
-				dataType : "json",
-				success : function(result) {
-					$('#res').text(JSON.stringify(result.data));
-				}
+			 $("button").click(function(){
+				    $.ajax({
+						url : "add",
+						type : "post",
+						data : JSON.stringify({
+							amount : $("#donate").val(),
+							datetime : new Date().getTime()
+						}),
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						success : function(result) {
+							$('#res').text("Current amount: " + JSON.stringify(result.res));
+							$('#msg').text(JSON.stringify(result.msg));
+						}
+					});
 			});
+			
+			
 
 		});
 	</script>
