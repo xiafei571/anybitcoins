@@ -1,22 +1,26 @@
 # anybitcoins
 Spring boot project
 
-mvn clean
+# install
+- `mvn clean`
 
-mvn install
+- `mvn install`
 
-cd -> {anybitcoins project}\target
+- `cd {anybitcoins project}\target`
 
-java -jar anybitcoins-0.0.1-SNAPSHOT.jar
+- `java -jar anybitcoins-0.0.1-SNAPSHOT.jar`
 
-visit http://localhost:8080/
+# run demo
 
-use some tools like Postman:
-[url]: http://localhost:8080/history
-[Content-Type]:application/json
-[data]: {"startDatetime": "2021-08-13T13:46:05+07:00","endDatetime": "2021-08-13T17:46:05+07:00"}
+- visit http://localhost:8080/
 
-get the result:
+- use some tools like Postman:
+    - url: http://localhost:8080/history
+    - Content-Type: application/json
+    - data: {"startDatetime": "2021-08-13T13:46:05+07:00","endDatetime": "2021-08-13T17:46:05+07:00"}
+
+- get the result:
+```
 {
     "status": 0,
     "res": [
@@ -30,3 +34,4 @@ get the result:
         }
     ]
 }
+```
