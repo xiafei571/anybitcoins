@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bitcoin dashboard</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+html, body, #container {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div id="res"></div>
+	<script>
+		$(function() {
+			$.ajax({
+				url : "history",
+				type : "post",
+				data : JSON.stringify({
+					startDatetime : new Date().getTime(),
+					endDatetime : new Date().getTime()
+				}),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(result) {
+					$('#res').text(JSON.stringify(result.data));
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
